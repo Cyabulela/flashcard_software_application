@@ -10,11 +10,11 @@ import com.example.flashcardsoftwareapplication.domain.repository.FlashCardRepos
 
 import java.util.List;
 
-public class FlashCardRepositoryImpl implements FlashCardRepository {
+public class FlashCardSQLiteDatabaseRepository implements FlashCardRepository {
 
     private final FlashCardDatabase database;
 
-    public FlashCardRepositoryImpl(Context context) {
+    public FlashCardSQLiteDatabaseRepository(Context context) {
         database = new FlashCardDatabase(context);
     }
     @Override

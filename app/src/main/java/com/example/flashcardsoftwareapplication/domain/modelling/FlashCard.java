@@ -1,15 +1,19 @@
 package com.example.flashcardsoftwareapplication.domain.modelling;
 
 import com.example.flashcardsoftwareapplication.data.dto.FlashCardDto;
+import org.parceler.Parcel;
 
+@Parcel
 public class FlashCard {
 
-    private final String title , notes , date;
+    final String title , notes , date ;
+    final int flashcardID;
 
-    public FlashCard(String title, String notes, String date) {
+    public FlashCard(String title, String notes, String date, int flashcardID) {
         this.title = title;
         this.notes = notes;
         this.date = date;
+        this.flashcardID = flashcardID;
     }
 
     public String getTitle() {
@@ -25,6 +29,10 @@ public class FlashCard {
     }
 
     public FlashCardDto toFlashCardDto() {
-        return new FlashCardDto(title , notes , date);
+        return new FlashCardDto(title , notes , date , flashcardID);
+    }
+
+    public int getFlashcardID() {
+        return flashcardID;
     }
 }

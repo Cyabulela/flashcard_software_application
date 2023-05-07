@@ -7,7 +7,9 @@ public interface FlashCardRepository {
 
     void insectFlashCard(FlashCard flashCard);
 
-    void updateFlashCard(FlashCard oldFlashCard , FlashCard newFlashCard);
+    void updateFlashCard(FlashCard flashCard);
+
+    boolean deleteFlashCard(FlashCard flashCard);
 
     List<FlashCard> getFlashCards();
 }
