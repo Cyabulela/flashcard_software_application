@@ -7,12 +7,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.flashcardsoftwareapplication.R;
+import com.example.flashcardsoftwareapplication.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }
