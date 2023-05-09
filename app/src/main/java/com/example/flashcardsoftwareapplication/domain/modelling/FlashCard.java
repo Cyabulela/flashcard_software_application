@@ -6,8 +6,10 @@ import org.parceler.Parcel;
 @Parcel
 public class FlashCard {
 
-    final String title , notes , date ;
-    final int flashcardID;
+    String title , notes , date ;
+    int flashcardID;
+
+    public FlashCard() {}
 
     public FlashCard(String title, String notes, String date, int flashcardID) {
         this.title = title;

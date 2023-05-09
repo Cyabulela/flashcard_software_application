@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="delete_button">delete button</string>
+    <string name="flashcard">FlashCard</string>
+    <string name="add_button">add button</string>
+    <string name="flashcards">Flashcards</string>
+    <string name="empty_list">You don\'t have any flashcard available, click tha fab button to add one</string>
 </resources>
