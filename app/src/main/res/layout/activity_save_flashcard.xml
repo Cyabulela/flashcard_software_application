@@ -47,6 +47,8 @@
                 android:hint="@string/title"
                 android:textSize="35sp"
                 android:textColor="@color/white"
+                android:inputType="textCapSentences|textMultiLine"
+                android:singleLine="false"
                 android:layout_marginTop="20dp"
                 android:padding="5dp"/>
 
@@ -54,10 +56,11 @@
                 android:id="@+id/flashcardEdit_Notes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="2"
                 android:hint="Notes"
                 android:textColor="@color/white"
                 android:singleLine="false"
+                android:inputType="textCapSentences|textMultiLine"
+
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
                 android:padding="5dp"/>

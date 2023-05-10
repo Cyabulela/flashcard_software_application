@@ -24,7 +24,7 @@ public class ViewFlashCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityViewFlashCardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        FlashCard flashCard = Parcels.unwrap(getIntent().getParcelableExtra(ParcableConstant.PARCEL_NAME));
+        FlashCard flashCard = (FlashCard) getIntent().getSerializableExtra(ParcableConstant.PARCEL_NAME );
         init(flashCard);
     }
 
@@ -32,8 +32,9 @@ public class ViewFlashCard extends AppCompatActivity {
         binding.flashcardViewTitle.setText(flashCard.getTitle());
         binding.flashcardViewNotes.setText(flashCard.getNotes());
         binding.editFlashcard.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putParcelable(ParcableConstant.PARCEL_NAME , Parcels.wrap(flashCard));
+            Intent intent = new Intent(this , SaveFlashcard.class);
+            intent.putExtra(ParcableConstant.PARCEL_NAME , flashCard);
+            startActivity(intent);
         });
     }
 

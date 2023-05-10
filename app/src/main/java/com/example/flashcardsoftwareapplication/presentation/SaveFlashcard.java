@@ -27,7 +27,7 @@ public class SaveFlashcard extends AppCompatActivity {
         binding = ActivitySaveFlashcardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         repository = new FlashCardSQLiteDatabaseRepository(this);
-        flashCard = Parcels.unwrap(getIntent().getParcelableExtra(ParcableConstant.PARCEL_NAME));
+        flashCard = (FlashCard) getIntent().getSerializableExtra(ParcableConstant.PARCEL_NAME);
         init();
     }
 
@@ -51,7 +51,7 @@ public class SaveFlashcard extends AppCompatActivity {
             binding.flashcardEditTitle.setError("Title can not be blank.");
             return;
         }
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         String lastUpdateDate = LocalDateTime.now().format(dateFormat);
         FlashCard newFlashCard = new FlashCard(
                 title,
@@ -75,13 +75,13 @@ public class SaveFlashcard extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent;
         if (flashCard == null) {
-            intent = new Intent(this , MainActivity.class);
+            Intent intent = new Intent(this , MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         } else {
-            intent = new Intent(this , ViewFlashCard.class);
+            super.onBackPressed();
         }
-        startActivity(intent);
-        finish();
     }
 }

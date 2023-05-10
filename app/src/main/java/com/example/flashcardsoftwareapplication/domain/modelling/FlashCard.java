@@ -3,13 +3,12 @@ package com.example.flashcardsoftwareapplication.domain.modelling;
 import com.example.flashcardsoftwareapplication.data.dto.FlashCardDto;
 import org.parceler.Parcel;
 
-@Parcel
-public class FlashCard {
+import java.io.Serializable;
 
-    String title , notes , date ;
-    int flashcardID;
+public class FlashCard implements Serializable {
 
-    public FlashCard() {}
+    private final String title , notes , date ;
+    private final int flashcardID;
 
     public FlashCard(String title, String notes, String date, int flashcardID) {
         this.title = title;

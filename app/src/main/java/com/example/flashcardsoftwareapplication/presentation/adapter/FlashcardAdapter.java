@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,27 +65,31 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
         public FlashcardViewHolder(NotesBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            this.binding.flashcardItem.setOnClickListener(this);
         }
 
         public void setData(FlashCard flashCard) {
             binding.flashcardTitle.setText(flashCard.getTitle());
-            String lastUpdateDate = binding.flashcardLastupdate.getText().toString() + flashCard.getDate();
-            binding.flashcardLastupdate.setText(lastUpdateDate);
+            String lastUpdateDate = binding.flashcardLastupdate.getText().toString();
+            String labal = "latest update:";
+            binding.flashcardLastupdate.setText((lastUpdateDate.equals(labal)) ? lastUpdateDate + flashCard.getDate() : lastUpdateDate);
             binding.flashcardNotes.setText(flashCard.getNotes());
             binding.flashcardDelete.setOnClickListener(view -> {
-                notifyItemRemoved(flashCards.indexOf(flashCard));
-                repository.deleteFlashCard(flashCard);
-                if (flashCards.size() == 0) {
-                    mainBinding.flashcardLists.setVisibility(View.GONE);
-                    mainBinding.emptyListText.setVisibility(View.VISIBLE);
+                boolean isItemRemoved = repository.deleteFlashCard(flashCard);
+                if (isItemRemoved) {
+                    flashCards.remove(flashCard);
+                    notifyDataSetChanged();
+                    if (flashCards.size() == 0) {
+                        mainBinding.flashcardLists.setVisibility(View.GONE);
+                        mainBinding.emptyListText.setVisibility(View.VISIBLE);
+                    }
                 }
             });
         }
 
         public void setOnClickListener(FlashCard flashCard) {
-            Bundle bundle = new Bundle();
-            bundle.putParcelable(ParcableConstant.PARCEL_NAME , Parcels.wrap(flashCard));
             Intent intent = new Intent(context , ViewFlashCard.class);
+            intent.putExtra(ParcableConstant.PARCEL_NAME , flashCard);
             context.startActivity(intent);
         }
 
